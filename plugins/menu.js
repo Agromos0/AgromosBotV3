@@ -24,7 +24,7 @@ let tags = {
 }
 const defaultMenu = {
   before: `
-  ────  *Agromos  ┃ ᴮᴼᵀ*  ────
+  ────  *TOXIC VIP - BOT*  ────
 
 👋🏻 _Hola_ *%name*
 
@@ -32,9 +32,9 @@ const defaultMenu = {
 🧿 Nivel : *%level* 
 📊 Database: %rtotalreg de %totalreg
 ─────────────
-▢ Crea tu propio bot 
-• https://youtube.com/channel/UCYfOaeRkOwMXzLxx11nwecA
-▢ Descarga 
+▢ Creador del bot: ANGEL YT
+• NUMERO: +523931678470
+▢ Numero  del bot: +52393180656
 ─────────────
 %readmore
 Ⓟ = Premium
