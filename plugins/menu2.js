@@ -22,7 +22,7 @@ envíame por
 └──────────────`
 const pp = await (await fetch('https://i.ibb.co/1RS6nJf/Screenshot-20220519-091526.jpg')).buffer()
     
-    conn.sendHydrated(m.chat, m2, '▢ Agromos  ┃ ᴮᴼᵀ\n▢ \fg98._\n', pp, '', 'YouTube', null, null, [
+    conn.sendHydrated(m.chat, m2, '▢ ToxicVIP  ┃ ᴮᴼᵀ\n▢ \fg98._\n', pp, '', 'YouTube', null, null, [
      ['⏍ Info', '/botinfo'],
       ['⌬ Grupos', '/gpdylux']
     ], m)
