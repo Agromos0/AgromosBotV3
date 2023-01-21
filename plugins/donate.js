@@ -3,11 +3,10 @@ let handler =  m => m.reply(`
 ≡ *DONACION*
 puedes donar si quieres ayudar a mantener el bot activo
 
-▢ *PayPal*
-• *Link :* 
-
-https://paypal.me/dotacionesdelbotagro?country.x=MX&locale.x=es_XC
-• 
+▢ *Banco Azteca*
+• numero  de clave:1271 8001 2098 0198 81
+• nombre: angel pantoja 
+•concepto donacion
 
 _Al donar consigues_  *Premium* 
 
