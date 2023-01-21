@@ -14,7 +14,7 @@ conn.send3Button(m.chat, `
 
 *=> Bot  para cualquier uso😹💚*
 
-`.trim(), 'AGROMOS SP - Bot', '🔵 MENÚ 🔵', `#menu`, '🔴 MENÚ NUEVO🔴', `#menunuevo`, '🟡 MENÚ AUDIOS 🟡', `#menuaudios`, m, false, { contextInfo: { mentionedJid }})}
+`.trim(), 'TOXIC VIP - Bot', '🔵 MENÚ 🔵', `#menu`, '🔴 MENÚ NUEVO🔴', `#menunuevo`, '🟡 MENÚ AUDIOS 🟡', `#menuaudios`, m, false, { contextInfo: { mentionedJid }})}
 
 handler.command = /^(estado|status|estate|state|stado|stats)$/i
 
