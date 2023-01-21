@@ -9,7 +9,7 @@ global.owner = [
 ] //Numeros de owner 
 
 global.mods = [] // Moderadores
-global.prems = ['595983186566', '5219631769130', '573125484672']  // El usuario Premium tiene diamantes ilimitado
+global.prems = ['523931678470', '5219631769130', '573125484672']  // El usuario Premium tiene diamantes ilimitado
 global.APIs = { // API Prefix
   // name: 'https://website'
   nrtm: 'https://nurutomo.herokuapp.com',
