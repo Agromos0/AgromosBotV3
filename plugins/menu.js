@@ -1,48 +1,53 @@
-
+//import db from '../lib/database.js'
 import { promises } from 'fs'
 import { join } from 'path'
 import fetch from 'node-fetch'
 import { xpRange } from '../lib/levelling.js'
+//import { plugins } from '../lib/plugins.js'
 let tags = {
   'main': 'ACERCA DE',
   'game': 'JUEGOS',
-  'xp': 'NIVEL & ECONOMIA',
-  
+  'econ': 'NIVEL & ECONOMIA',
+  'rg': 'REGISTRO',
   'sticker': 'STICKER',
-   'img': 'IMAGEN',
+  'img': 'IMAGEN',
+  'maker': 'MAKER',
+  'prem': 'PREMIUM',
   'group': 'GRUPO',
   'nable': 'EN/DISABLE OPCIONES', 
-  'premium': 'PREMIUM',
   'nime': 'ANIME',
-  'downloader': 'DESCARGAS',
+  'rnime': 'ANIME REACCION',
+  'dl': 'DESCARGAS',
   'tools': 'TOOLS',
   'fun': 'FUN',
-  'database': 'DATABASE',
-  'serbot': 'SUB BOTS',
+  'cmd': 'DATABASE',
   'nsfw': 'NSFW +18', 
+  'ansfw': 'NSFW ANIME',
   'owner': 'OWNER', 
   'advanced': 'AVANZADO',
 }
 const defaultMenu = {
   before: `
-  ────  *Agromos  ┃ ᴮᴼᵀ*  ────
+◈ ━━━━━ *DyLux  ┃ ᴮᴼᵀ* ━━━━━ ◈
+ 
 👋🏻 _Hola_ *%name*
-⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄ ⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥ ⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿ ⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵ ⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿ ⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁ ⠄⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁⠄⠄ ⠄⠄⠄⠄⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁⠄⠄⠄⠄⠄ ⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⠄
-🏆 Rango : *%role*
 🧿 Nivel : *%level* 
-📊 Database: %rtotalreg de %totalreg
+👥 Usuarios : %totalreg
+📈 Tiempo activo : %muptime
 ─────────────
-⣿⣿⣿⣿⠛⠛⠉⠄⠁⠄⠄⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⡟⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⡇⠄⠄⠄⠐⠄⠄⠄⠄⠄⠄⠄⠠⣿⣿⣿⣿⣿⣿ ⣿⣿⡇⠄⢀⡀⠠⠃⡐⡀⠠⣶⠄⠄⢀⣿⣿⣿⣿⣿⣿ ⣿⣿⣶⠄⠰⣤⣕⣿⣾⡇⠄⢛⠃⠄⢈⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⡇⢀⣻⠟⣻⣿⡇⠄⠧⠄⢀⣾⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣟⢸⣻⣭⡙⢄⢀⠄⠄⠄⠈⢹⣯⣿⣿⣿⣿⣿ ⣿⣿⣿⣭⣿⣿⣿⣧⢸⠄⠄⠄⠄⠄⠈⢸⣿⣿⣿⣿⣿ ⣿⣿⣿⣼⣿⣿⣿⣽⠘⡄⠄⠄⠄⠄⢀⠸⣿⣿⣿⣿⣿ ⡿⣿⣳⣿⣿⣿⣿⣿⠄⠓⠦⠤⠤⠤⠼⢸⣿⣿⣿⣿⣿ ⡹⣧⣿⣿⣿⠿⣿⣿⣿⣿⣿⣿⣿⢇⣓⣾⣿⣿⣿⣿⣿ ⡞⣸⣿⣿⢏⣼⣶⣶⣶⣶⣤⣶⡤⠐⣿⣿⣿⣿⣿⣿⣿ ⣯⣽⣛⠅⣾⣿⣿⣿⣿⣿⡽⣿⣧⡸⢿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⡷⠹⠛⠉⠁⠄⠄⠄⠄⠄⠄⠐⠛⠻⣿⣿⣿⣿ ⣿⣿⣿⠃⠄⠄⠄⠄⠄⣠⣤⣤⣤⡄⢤⣤⣤⣤⡘⠻⣿ ⣿⣿⡟⠄⠄⣀⣤⣶⣿⣿⣿⣿⣿⣿⣆⢻⣿⣿⣿⡎⠝ ⣿⡏⠄⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡎⣿⣿⣿⣿⠐ ⣿⡏⣲⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢇⣿⣿⣿⡟⣼ ⣿⡠⠜⣿⣿⣿⣿⣟⡛⠿⠿⠿⠿⠟⠃⠾⠿⢟⡋⢶⣿ ⣿⣧⣄⠙⢿⣿⣿⣿⣿⣿⣷⣦⡀⢰⣾⣿⣿⡿⢣⣿⣿ ⣿⣿⣿⠂⣷⣶⣬⣭⣭⣭⣭⣵⢰⣴⣤⣤⣶⡾⢐⣿⣿ ⣿⣿⣿⣷⡘⣿⣿⣿⣿⣿⣿⣿⢸⣿
-▢ Creador del bot= ANGEL YT
-•NUMERO DEL CREADOR= +523931678470
+▢ Crea tu propio bot 
+• https://youtu.be/xFqjKN1Qt80
+▢ Descarga *FGWhatsApp*
+• https://fgmods.epizy.com
 ─────────────
 %readmore
 Ⓟ = Premium
 ⓓ = Diamantes
 -----  -----  -----  -----  -----
+  ≡ *LISTA DE MENUS*
 `.trimStart(),
   header: '┌─⊷ *%category*',
-  body: '▢ %cmd %islimit %isPremium',
+  body: '▢ %cmd %isdiamond %isPremium',
   footer: '└───────────\n',
   after: `
 `,
@@ -50,7 +55,7 @@ const defaultMenu = {
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
   try {
     let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
-    let { exp, limit, level, role } = global.db.data.users[m.sender]
+    let { exp, diamond, level, role } = global.db.data.users[m.sender]
     let { min, xp, max } = xpRange(level, global.multiplier)
     let name = await conn.getName(m.sender)
     let d = new Date(new Date + 3600000)
@@ -94,7 +99,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
         help: Array.isArray(plugin.tags) ? plugin.help : [plugin.help],
         tags: Array.isArray(plugin.tags) ? plugin.tags : [plugin.tags],
         prefix: 'customPrefix' in plugin,
-        limit: plugin.limit,
+        diamond: plugin.diamond,
         premium: plugin.premium,
         enabled: !plugin.disabled,
       }
@@ -108,7 +113,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     let header = conn.menu.header || defaultMenu.header
     let body = conn.menu.body || defaultMenu.body
     let footer = conn.menu.footer || defaultMenu.footer
-    let after = conn.menu.after || (conn.user.jid == global.conn.user.jid ? '' : `Powered by https://wa.me/${global.conn.user.jid.split`@`[0]}`) + defaultMenu.after
+    let after = conn.menu.after || (conn.user.jid == conn.user.jid ? '' : `Powered by https://wa.me/${conn.user.jid.split`@`[0]}`) + defaultMenu.after
     let _text = [
       before,
       ...Object.keys(tags).map(tag => {
@@ -116,7 +121,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
           ...help.filter(menu => menu.tags && menu.tags.includes(tag) && menu.help).map(menu => {
             return menu.help.map(help => {
               return body.replace(/%cmd/g, menu.prefix ? help : '%p' + help)
-                .replace(/%islimit/g, menu.limit ? '(ⓓ)' : '')
+                .replace(/%isdiamond/g, menu.diamond ? '(ⓓ)' : '')
                 .replace(/%isPremium/g, menu.premium ? '(Ⓟ)' : '')
                 .trim()
             }).join('\n')
@@ -139,27 +144,36 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
       totalexp: exp,
       xp4levelup: max - exp,
       github: _package.homepage ? _package.homepage.url || _package.homepage : '[unknown github url]',
-      level, limit, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role,
+      level, diamond, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role,
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     
-  //const pp = await conn.profilePictureUrl(conn.user.jid).catch(_ => './src/avatar_contact.png')
-const pp = await (await fetch('https://i.ibb.co/1RS6nJf/Screenshot-20220519-091526.jpg')).buffer()
+    let pp = './src/fg_logo.jpg'
     
-    conn.sendHydrated(m.chat, text.trim(), '▢ TOXIC VIP  ┃ \n▢ ANGEL  YT._\n', pp, 'https://chat.whatsapp.com/GNgvKstDSQg3xeEGdXTQMu', 'whatsapp', null, null, [
-      ['ꨄ︎ Apoyar', '/donate'],
-      ['✆ Owner', '/owner']
-    ], m)
+     /*conn.sendHydrated2(m.chat, text.trim(), '▢ DyLux  ┃ ᴮᴼᵀ\n▢ Sígueme en Instagram\nhttps://www.instagram.com/fg98_ff', pp, fgyt, 'YouTube', 'https://paypal.me/fg98f', 'PayPal', [
+      ['ꨄ︎ Apoyar', `${_p}donate`],
+      ['⏍ Info', `${_p}botinfo`],
+      ['⌬ Grupos', `${_p}gpdylux`]
+    ], m)*/  
+    conn.sendButton(m.chat, text.trim(), '▢ DyLux  ┃ ᴮᴼᵀ\n▢ Sígueme en Instagram\nhttps://www.instagram.com/fg98_ff', pp, [
+      ['ꨄ︎ Apoyar', `${_p}donate`],
+      ['⏍ Info', `${_p}botinfo`],
+      ['⌬ Grupos', `${_p}gpdylux`]
+    ],m, rpl)
+  
+    m.react('📚') 
+    
   } catch (e) {
-    conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m)
+    conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error', m)
     throw e
   }
 }
 handler.help = ['help']
 handler.tags = ['main']
 handler.command = ['menu', 'help', 'menú'] 
-handler.register = true
+handler.register = false
+
 handler.exp = 3
 
 export default handler
@@ -168,8 +182,9 @@ const more = String.fromCharCode(8206)
 const readMore = more.repeat(4001)
 
 function clockString(ms) {
-  let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
+  let d = isNaN(ms) ? '--' : Math.floor(ms / 86400000)
+  let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000) % 24
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
-  return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
+  return [d, 'd ', h, 'h ', m, 'm '].map(v => v.toString().padStart(2, 0)).join('')
 }
