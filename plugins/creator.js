@@ -16,16 +16,15 @@ function handler(m) {
 
   
   
-▢ YouTube : https://youtube.com/channel/UCYfOaeRkOwMXzLxx11nwecA
-  • https://youtube.com/fg98f
+
   
  *≡ HELPERS*
   *Creador*
-▢ Youtube https://youtube.com/channel/UCYfOaeRkOwMXzLxx11nwecA
-▢ WhatsApp : wa.me/523931806576
+▢ ANGEL YT
+▢ WhatsApp : wa.me/523931678470
   *Bot oficial*
-▢ YouTube https://youtube.com/channel/UCYfOaeRkOwMXzLxx11nwecA
-▢ WhatsApp : wa.me/595983186566
+▢ https://chat.whatsapp.com/GNgvKstDSQg3xeEGdXTQMu
+▢ WhatsApp : wa.me/523931806576
 `) 
 
 
