@@ -32,5 +32,5 @@ const pp = await (await fetch('https://i.ibb.co/1RS6nJf/Screenshot-20220519-0915
 handler.help = ['menu2']
 handler.tags = ['main']
 handler.command = ['menu2'] 
-handler.register = true
+//handler.register = true
 export default handler
