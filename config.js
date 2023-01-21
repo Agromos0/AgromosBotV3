@@ -32,9 +32,9 @@ global.APIKeys = { // APIKey Here
 }
 
 // Sticker WM
-global.packname = 'Agromos Bot'
-global.author = '@AGROMOS._'
-global.igfg = '\n▢ Sígueme en Youtube AGROMOS YT._\n' 
+global.packname = 'ToxicViP-BOT'
+global.author = '@ANGEL YT._'
+global.igfg = '\n▢ Sígueme en Youtube TOXIC VIP-BOT._\n' 
 
 global.wait = '*⌛ _Cargando..._ ▬▬▬▭*'
 
